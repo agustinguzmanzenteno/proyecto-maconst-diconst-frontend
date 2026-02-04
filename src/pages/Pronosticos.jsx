@@ -74,7 +74,7 @@ const Pronosticos = () => {
       const params = new URLSearchParams();
       if (desde) params.append('desde', desde);
       if (hasta) params.append('hasta', hasta);
-      const data = await apiFetch(`/api/predecir?${params.toString()}`);
+      const data = await apiFetch(`/predecir?${params.toString()}`);
       setItems(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
@@ -102,7 +102,7 @@ const Pronosticos = () => {
 const onSubmitModal = async (payload) => {
   try {
     if (modalMode === 'create') {
-      await apiFetch('/api/predecir', { method: 'POST', body: payload, noThrow: true });
+      await apiFetch('/predecir', { method: 'POST', body: payload, noThrow: true });
       toast.success('Predicción creada exitosamente');
     } else if (modalMode === 'regenerate') {
       const safeId = extractMongoId(current?._id);
@@ -122,7 +122,7 @@ const onSubmitModal = async (payload) => {
         }
       };
 
-      await apiFetch(`/api/predecir/${encodeURIComponent(safeId)}`, { method: 'PUT', body, noThrow: true });
+      await apiFetch(`/predecir/${encodeURIComponent(safeId)}`, { method: 'PUT', body, noThrow: true });
       toast.success('Predicción actualizada exitosamente');
     }
   } catch (e) {
@@ -137,7 +137,7 @@ const onSubmitModal = async (payload) => {
 const onDelete = async () => {
   try {
     const id = extractMongoId(toDelete);
-    await apiFetch(`/api/predecir/${encodeURIComponent(id)}`, { method: 'DELETE', noThrow: true });
+    await apiFetch(`/predecir/${encodeURIComponent(id)}`, { method: 'DELETE', noThrow: true });
 
     toast.success('Predicción eliminada');
   } catch (e) {

@@ -21,7 +21,7 @@ function normalizeBase(base) {
   return b;
 }
 
-const API_BASE = normalizeBase(import.meta.env.VITE_API_URL || 'http://localhost:4000');
+const API_BASE = normalizeBase(import.meta.env.VITE_PREDICT_API_URL || 'http://localhost:5000');
 
 export async function apiMongoFetch(path, { method = 'GET', body, headers, noThrow = false } = {}) {
   const url = path.startsWith('http') ? path : `${API_BASE}${path.startsWith('/') ? '' : '/'}${path}`;
